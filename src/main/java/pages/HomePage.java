@@ -3,6 +3,7 @@ package pages;
 import enums.NavigationTab;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import pages.abstraction.Page;
 
 public class HomePage extends Page {
 

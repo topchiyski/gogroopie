@@ -2,10 +2,12 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import pages.abstraction.Page;
 
 public class ProductPage extends Page {
 
     private static final By dropDownSelectionTitle = By.cssSelector("div.dropdown-selection-title");
+
     public ProductPage(WebDriver webDriver) {
         super(webDriver);
     }

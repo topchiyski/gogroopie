@@ -13,7 +13,7 @@ public class TestManager {
         System.setProperty("webdriver.chrome.driver", PATH_TO_CHROME_DRIVER);
         webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
-        int defaultImpliocitWaitInterval = 30;
+        int defaultImpliocitWaitInterval = 60;
         webDriver.manage().timeouts().implicitlyWait(defaultImpliocitWaitInterval, TimeUnit.SECONDS);
     }
 

@@ -6,6 +6,8 @@ import org.junit.Test;
 import pages.DealPage;
 import pages.HomePage;
 import pages.ProductPage;
+import pages.factory.PageFactory;
+import pages.factory.PageType;
 import utils.TestManager;
 
 public class TestSuite {
@@ -17,7 +19,7 @@ public class TestSuite {
 
     @Test
     public void homePageReachable() {
-        HomePage homePage = new HomePage(testManager.getWebDriver());
+        HomePage homePage = (HomePage) PageFactory.getPage(PageType.HOME,testManager.getWebDriver());
         Assert.assertTrue("Home Page is not displayed", homePage.isHomePageDisplayed(FIVE_SECONDS));
         Assert.assertTrue("Subscribe to GoGroopie pop up is missing", homePage.isSubscribeToGoGroopiePopUpDisplayed(ONE_SECOND));
         Assert.assertEquals(BASE_ADDRESS, homePage.getCurrentUrl());
@@ -27,10 +29,10 @@ public class TestSuite {
 
     @Test
     public void signInPageReachableThroughBuyPage() throws InterruptedException {
-        HomePage homePage = new HomePage(testManager.getWebDriver());
+        HomePage homePage = (HomePage) PageFactory.getPage(PageType.HOME,testManager.getWebDriver());
         homePage.closeSubscribeToGoGroopiePopUp();
         homePage.selectFirstDeal();
-        DealPage dealPage = new DealPage(testManager.getWebDriver());
+        DealPage dealPage = (DealPage) PageFactory.getPage(PageType.DEAL, testManager.getWebDriver());
         dealPage.clickBuyNowButton();
         Assert.assertTrue("URL does not contains /buy/", dealPage.getCurrentUrl().contains(BASE_ADDRESS + "buy/"));
         Assert.assertTrue("Authentication section is not present", dealPage.isAuthenticationSectionPresent());
@@ -42,10 +44,10 @@ public class TestSuite {
 
     @Test
     public void verifyDefaultValueIsSelectedOnProductPage() throws InterruptedException {
-        HomePage homePage = new HomePage(testManager.getWebDriver());
+        HomePage homePage = (HomePage) PageFactory.getPage(PageType.HOME,testManager.getWebDriver());
         homePage.closeSubscribeToGoGroopiePopUp();
         homePage.clickOnNavigationTab(NavigationTab.PRODUCTS);
-        ProductPage productPage = new ProductPage(testManager.getWebDriver());
+        ProductPage productPage = (ProductPage) PageFactory.getPage(PageType.PRODUCT, testManager.getWebDriver());
         String actualSortByDefaultValue = productPage.getValueOfSortByDropdown();
         String expectedSortByDefaultValue = "Selected";
         Assert.assertEquals(expectedSortByDefaultValue, actualSortByDefaultValue);
